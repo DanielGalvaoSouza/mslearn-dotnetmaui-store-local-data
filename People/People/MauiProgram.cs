@@ -14,6 +14,10 @@ public static class MauiProgram
 			});
 
 		// TODO: Add statements for adding PersonRepository as a singleton
+
+		builder.Services.AddSingleton<Models.PersonRepository>(
+			s => ActivatorUtilities.CreateInstance<Models.PersonRepository>(s, FileAccessHelper.GetLocalFilePath())
+		);
 			
         return builder.Build();
 	}

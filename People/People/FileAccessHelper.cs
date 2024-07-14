@@ -2,8 +2,10 @@
 
 public class FileAccessHelper
 {
-    public static string GetLocalFilePath(string filename)
+    private const string DataBaseFileName = "people.db3";
+
+    public static string GetLocalFilePath()
     {
-        return System.IO.Path.Combine(FileSystem.AppDataDirectory, filename);
+        return System.IO.Path.Combine(FileSystem.AppDataDirectory, DataBaseFileName);
     }
 }
