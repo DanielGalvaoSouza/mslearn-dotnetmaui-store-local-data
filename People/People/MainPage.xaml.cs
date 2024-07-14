@@ -11,20 +11,34 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
-    public void OnNewButtonClicked(object sender, EventArgs args)
+    public async void OnNewButtonClickedAsync(object sender, EventArgs args)
     {
         statusMessage.Text = "";
 
-        App.PersonRepo.AddNewPerson(newPerson.Text);
+        await App.PersonRepo.AddNewPerson(newPerson.Text);
         statusMessage.Text = App.PersonRepo.StatusMessage;
+
+        await GetAllPeople();
     }
 
-    public void OnGetButtonClicked(object sender, EventArgs args)
+    public async void OnGetButtonClickedAsync(object sender, EventArgs args)
     {
         statusMessage.Text = "";
 
-        List<Person> people = App.PersonRepo.GetAllPeople();
+        await this.GetAllPeople();
+
+    }
+
+    private async Task GetAllPeople()
+    {
+        List<Person> people = await App.PersonRepo.GetAllPeople();
         peopleList.ItemsSource = people;
+
+        if(people.ToList().Count > 0)
+        {
+            statusMessage.Text = "";
+        }
+
     }
 
 }

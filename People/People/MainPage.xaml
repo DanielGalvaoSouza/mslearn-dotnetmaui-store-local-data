@@ -12,7 +12,7 @@
 
         <Button Text="Add Person"
             Grid.Row="1"
-            Clicked="OnNewButtonClicked" />
+            Clicked="OnNewButtonClickedAsync" />
 
         <Label x:Name="statusMessage"
            TextColor="{StaticResource Primary}"
@@ -20,7 +20,7 @@
 
         <Button Text="Get All People"
             Grid.Row="3"
-            Clicked="OnGetButtonClicked" />
+            Clicked="OnGetButtonClickedAsync" />
 
         <CollectionView x:Name="peopleList" Grid.Row="4">
             <CollectionView.ItemTemplate>
