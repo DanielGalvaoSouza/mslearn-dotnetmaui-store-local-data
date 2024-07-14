@@ -32,6 +32,7 @@ namespace People.Models
         public async Task AddNewPerson(string name)
         {
             int result = 0;
+
             try
             {
                 //enter this line
@@ -49,7 +50,7 @@ namespace People.Models
             {
                 StatusMessage = string.Format("Failed to retrieved data. {0}", ex.Message);
             }
-
+            
         }
 
         public async Task<List<Person>> GetAllPeople()

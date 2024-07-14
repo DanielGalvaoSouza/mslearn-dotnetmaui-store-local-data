@@ -33,6 +33,12 @@ public partial class MainPage : ContentPage
     {
         List<Person> people = await App.PersonRepo.GetAllPeople();
         peopleList.ItemsSource = people;
+
+        if(people.ToList().Count > 0)
+        {
+            statusMessage.Text = "";
+        }
+
     }
 
 }
