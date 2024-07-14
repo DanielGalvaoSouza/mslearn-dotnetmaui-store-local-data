@@ -9,7 +9,7 @@ namespace People.Models
 {
     public class PersonRepository
     {
-        private SQLiteConnection _connection;
+        private SQLiteAsyncConnection _connection;
         private string _dbPath { get;set; }
 
         public PersonRepository(string dbPath)
@@ -24,12 +24,12 @@ namespace People.Models
             if (_connection != null)
                 return;
 
-            _connection = new SQLiteConnection(_dbPath);
-            _connection.CreateTable<Person>();
+            _connection = new SQLiteAsyncConnection(_dbPath);
+            _connection.CreateTableAsync<Person>();
 
         }
 
-        public void AddNewPerson(string name)
+        public async Task AddNewPerson(string name)
         {
             int result = 0;
             try
@@ -42,7 +42,7 @@ namespace People.Models
                     throw new Exception("Invalid name required");
 
                 // enter this line
-                result = _connection.Insert(new Person { Name = name});
+                result = await _connection.InsertAsync(new Person { Name = name});
 
             }
             catch (Exception ex)
@@ -52,12 +52,12 @@ namespace People.Models
 
         }
 
-        public List<Person> GetAllPeople()
+        public async Task<List<Person>> GetAllPeople()
         {
             try
             {
                 Init();
-                return _connection.Table<Person>().ToList();
+                return await _connection.Table<Person>().ToListAsync();
             }
             catch (Exception ex)
             {
